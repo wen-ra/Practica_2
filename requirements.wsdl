@@ -1,0 +1,104 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:tns="http://www.example.org/directorio"
+    name="DirectorioService"
+    targetNamespace="http://www.example.org/directorio">
+    <types>
+        <xs:schema targetNamespace="http://www.example.org/directorio">
+            <!--BUSCAR-->
+            <xs:element name="Buscar">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="nombre" type="xsd:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="BuscarResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="BuscarResult" type="xsd:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <!--ELIMINAR-->
+            <xs:element name="Eliminar">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="nombre" type="xsd:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="EliminarResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="EliminarResult" type="xsd:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </types>
+
+    <!--BUSCAR-->
+    <message name="BuscarRequest">
+        <part name="parameters" element="tns:Buscar"/>
+    </message>
+    <message name="BuscarResponse">
+        <part name="parameters" element="tns:BuscarResponse"/>
+    </message>
+
+    <!--ELIMINAR-->
+    <message name="EliminarRequest">
+        <part name="parameters" element="tns:Eliminar"/>
+    </message>
+    <message name="EliminarResponse">
+        <part name="parameters" element="tns:EliminarResponse"/>
+    </message>
+
+    <portType name="DirectorioPortType">
+        <!--BUSCAR-->
+        <operation name="Buscar">
+            <input message="tns:BuscarRequest"/>
+            <output message="tns:BuscarResponse"/>
+        </operation>
+
+        <!--ELIMINAR-->
+        <operation name="Eliminar">
+            <input message="tns:EliminarRequest"/>
+            <output message="tns:EliminarResponse"/>
+        </operation>
+    </portType>
+    
+    <binding name="DirectorioBinding" type="tns:DirectorioPortType">
+        <soap12:binding style="rpc"
+                        transport="http://www.w3.org/2003/05/soap/bindings/HTTP/"/>
+        <!--BUSCAR-->
+        <operation name="Buscar">
+            <soap12:operation soapAction="http://www.example.org/directorio/Buscar"/>
+            <input>
+                <soap12:body use="literal"/>
+            </input>
+            <output>
+                <soap12:body use="literal"/>
+            </output>
+        </operation>
+
+        <!--ELIMINAR-->
+        <operation name="Eliminar">
+            <soap12:operation soapAction="http://www.example.org/directorio/Eliminar"/>
+            <input>
+                <soap12:body use="literal"/>
+            </input>
+            <output>
+                <soap12:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+    
+    <service name="DirectorioService">
+        <port name="DirectorioPort" binding="tns:DirectorioBinding">
+            <soap12:address location="http://localhost:3000/directorio"/>
+        </port>
+    </service>
+</definitions>
