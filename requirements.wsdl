@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="DirectorioService"
+             targetNamespace="http://localhost:3000/directorio/wsdl"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns="http://localhost:3000/directorio/wsdl"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <message name="AñadirRequest">
+        <part name="nombre" type="xsd:string"/>
+        <part name="telefono" type="xsd:string"/>
+        <part name="celular" type="xsd:string"/>
+        <part name="correo" type="xsd:string"/>
+    </message>
+    <message name="AñadirResponse">
+        <part name="AñadirResult" type="xsd:string"/>
+    </message>
+
+    <message name="EditarRequest">
+        <part name="nombre" type="xsd:string"/>
+        <part name="seleccion" type="xsd:int"/>
+        <part name="newElemento" type="xsd:string"/>
+    </message>
+    <message name="EditarResponse">
+        <part name="EditarResult" type="xsd:string"/>
+    </message>
+
+    <message name="BuscarRequest">
+        <part name="nombre" type="xsd:string"/>
+    </message>
+    <message name="BuscarResponse">
+        <part name="BuscarResult" type="xsd:string"/>
+    </message>
+
+    <message name="EliminarRequest">
+        <part name="nombre" type="xsd:string"/>
+    </message>
+    <message name="EliminarResponse">
+        <part name="EliminarResult" type="xsd:string"/>
+    </message>
+
+    <message name="OrdenarAlfabeticoRequest">
+        <part name="dummy" type="xsd:string"/>
+    </message>
+    <message name="OrdenarAlfabeticoResponse">
+        <part name="OrdenarAlfabeticoResult" type="xsd:string"/>
+    </message>
+
+    <message name="OrdenarAlfabeticoCorreoRequest">
+        <part name="dummy" type="xsd:string"/>
+    </message>
+    <message name="OrdenarAlfabeticoCorreoResponse">
+        <part name="OrdenarAlfabeticoCorreoResult" type="xsd:string"/>
+    </message>
+
+    <portType name="DirectorioPortType">
+        <operation name="Añadir">
+            <input message="tns:AñadirRequest"/>
+            <output message="tns:AñadirResponse"/>
+        </operation>
+        <operation name="Editar">
+            <input message="tns:EditarRequest"/>
+            <output message="tns:EditarResponse"/>
+        </operation>
+        <operation name="Buscar">
+            <input message="tns:BuscarRequest"/>
+            <output message="tns:BuscarResponse"/>
+        </operation>
+        <operation name="Eliminar">
+            <input message="tns:EliminarRequest"/>
+            <output message="tns:EliminarResponse"/>
+        </operation>
+        <operation name="OrdenarAlfabetico">
+            <input message="tns:OrdenarAlfabeticoRequest"/>
+            <output message="tns:OrdenarAlfabeticoResponse"/>
+        </operation>
+        <operation name="OrdenarAlfabeticoCorreo">
+            <input message="tns:OrdenarAlfabeticoCorreoRequest"/>
+            <output message="tns:OrdenarAlfabeticoCorreoResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="DirectorioBinding" type="tns:DirectorioPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="Añadir">
+            <soap:operation soapAction="Añadir"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="Editar">
+            <soap:operation soapAction="Editar"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="Buscar">
+            <soap:operation soapAction="Buscar"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="Eliminar">
+            <soap:operation soapAction="Eliminar"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="OrdenarAlfabetico">
+            <soap:operation soapAction="OrdenarAlfabetico"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="OrdenarAlfabeticoCorreo">
+            <soap:operation soapAction="OrdenarAlfabeticoCorreo"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="DirectorioService">
+        <port name="DirectorioPort" binding="tns:DirectorioBinding">
+            <soap:address location="http://192.168.100.13:3000/directorio"/>
+        </port>
+    </service>
+</definitions>
